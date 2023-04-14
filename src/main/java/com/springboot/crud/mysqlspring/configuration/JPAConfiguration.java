@@ -1,4 +1,4 @@
-package configuration;
+package com.springboot.crud.mysqlspring.configuration;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
