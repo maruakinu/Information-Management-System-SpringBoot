@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class ArticleServiceImpl implements ArticleService{
@@ -30,8 +33,15 @@ public class ArticleServiceImpl implements ArticleService{
 
     }
 
+    @Override
+    public ArticleDto getArticle(String title) {
+        ArticleEntity found = articleRepository.findByTitle(title);
+        return convertEntityToDto(found, false, 0L);
+    }
+
     private ArticleDto convertEntityToDto(ArticleEntity entity, Boolean favorited, Long favoritesCount) {
         return ArticleDto.builder()
+                .id(entity.getId())
                 .title(entity.getTitle())
                 .description(entity.getDescription())
                 .author(entity.getAuthor())

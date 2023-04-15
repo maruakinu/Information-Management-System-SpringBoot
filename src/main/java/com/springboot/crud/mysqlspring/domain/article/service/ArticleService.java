@@ -6,4 +6,6 @@ public interface ArticleService {
 
     ArticleDto createArticle(final ArticleDto article);
 
+    ArticleDto getArticle(final String title);
+
 }
