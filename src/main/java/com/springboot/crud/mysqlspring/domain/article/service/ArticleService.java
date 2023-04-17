@@ -8,4 +8,6 @@ public interface ArticleService {
 
     ArticleDto getArticle(final String title);
 
+    void deleteArticle(final String title);
+
 }

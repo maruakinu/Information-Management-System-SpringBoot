@@ -39,6 +39,13 @@ public class ArticleServiceImpl implements ArticleService{
         return convertEntityToDto(found, false, 0L);
     }
 
+    @Transactional
+    @Override
+    public void deleteArticle(String title) {
+        ArticleEntity found = articleRepository.findByTitle(title);
+        articleRepository.delete(found);
+    }
+
     private ArticleDto convertEntityToDto(ArticleEntity entity, Boolean favorited, Long favoritesCount) {
         return ArticleDto.builder()
                 .id(entity.getId())

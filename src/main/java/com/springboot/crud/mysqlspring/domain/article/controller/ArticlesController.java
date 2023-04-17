@@ -24,5 +24,12 @@ public class ArticlesController {
         return new ArticleDto.SingleArticle<>(articleService.getArticle(title));
     }
 
+    @DeleteMapping("/{title}")
+    public void deleteArticle(@PathVariable String title) {
+        articleService.deleteArticle(title);
+    }
+
+
+
 
 }
