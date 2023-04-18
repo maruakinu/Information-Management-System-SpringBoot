@@ -52,9 +52,7 @@ public class ArticleServiceImpl implements ArticleService{
         ArticleEntity found = articleRepository.findByTitle(title);
 
         if (article.getTitle() != null) {
-            String newSlug = String.join("-", article.getTitle().split(" "));
             found.setTitle(article.getTitle());
-            found.setTitle(newSlug);
         }
 
         if (article.getDescription() != null) {
@@ -67,7 +65,9 @@ public class ArticleServiceImpl implements ArticleService{
 
         articleRepository.save(found);
 
-        return getArticle(title);
+        //return getArticle(title);
+
+        return convertEntityToDto(found, false, 0L);
     }
 
     private ArticleDto convertEntityToDto(ArticleEntity entity, Boolean favorited, Long favoritesCount) {
