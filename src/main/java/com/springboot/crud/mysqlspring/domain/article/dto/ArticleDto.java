@@ -27,4 +27,14 @@ public class ArticleDto {
         private T article;
     }
 
+    @Getter
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class Update {
+        private String title;
+        private String description;
+        private String author;
+    }
+
 }

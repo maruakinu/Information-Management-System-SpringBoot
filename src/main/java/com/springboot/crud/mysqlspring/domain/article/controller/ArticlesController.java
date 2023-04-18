@@ -29,6 +29,11 @@ public class ArticlesController {
         articleService.deleteArticle(title);
     }
 
+    @PutMapping("/{title}")
+    public ArticleDto.SingleArticle<ArticleDto> createArticle(@PathVariable String title, @RequestBody ArticleDto.SingleArticle<ArticleDto.Update> article) {
+        return new ArticleDto.SingleArticle<>(articleService.updateArticle(title, article.getArticle()));
+    }
+
 
 
 

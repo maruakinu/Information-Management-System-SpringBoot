@@ -46,6 +46,30 @@ public class ArticleServiceImpl implements ArticleService{
         articleRepository.delete(found);
     }
 
+    @Transactional
+    @Override
+    public ArticleDto updateArticle(String title, ArticleDto.Update article) {
+        ArticleEntity found = articleRepository.findByTitle(title);
+
+        if (article.getTitle() != null) {
+            String newSlug = String.join("-", article.getTitle().split(" "));
+            found.setTitle(article.getTitle());
+            found.setTitle(newSlug);
+        }
+
+        if (article.getDescription() != null) {
+            found.setDescription(article.getDescription());
+        }
+
+        if (article.getAuthor() != null) {
+            found.setAuthor(article.getAuthor());
+        }
+
+        articleRepository.save(found);
+
+        return getArticle(title);
+    }
+
     private ArticleDto convertEntityToDto(ArticleEntity entity, Boolean favorited, Long favoritesCount) {
         return ArticleDto.builder()
                 .id(entity.getId())

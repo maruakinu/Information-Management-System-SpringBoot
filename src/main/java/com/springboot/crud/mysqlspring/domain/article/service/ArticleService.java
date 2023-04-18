@@ -10,4 +10,7 @@ public interface ArticleService {
 
     void deleteArticle(final String title);
 
+    ArticleDto updateArticle(final String title, final ArticleDto.Update article);
+
+
 }
