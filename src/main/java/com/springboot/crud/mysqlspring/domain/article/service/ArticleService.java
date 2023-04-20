@@ -2,6 +2,8 @@ package com.springboot.crud.mysqlspring.domain.article.service;
 
 import com.springboot.crud.mysqlspring.domain.article.dto.ArticleDto;
 
+import java.util.List;
+
 public interface ArticleService {
 
     ArticleDto createArticle(final ArticleDto article);
@@ -12,5 +14,6 @@ public interface ArticleService {
 
     ArticleDto updateArticle(final String title, final ArticleDto.Update article);
 
+    List<ArticleDto> getAllArticles();
 
 }

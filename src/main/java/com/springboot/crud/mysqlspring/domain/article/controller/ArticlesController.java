@@ -34,7 +34,12 @@ public class ArticlesController {
         return new ArticleDto.SingleArticle<>(articleService.updateArticle(title, article.getArticle()));
     }
 
-
+    @GetMapping("/all")
+    public ArticleDto.MultipleArticle getArticle() {
+        return ArticleDto.MultipleArticle.builder()
+                .articles(articleService.getAllArticles())
+                .build();
+    }
 
 
 }

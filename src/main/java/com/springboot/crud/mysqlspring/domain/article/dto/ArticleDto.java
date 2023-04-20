@@ -3,6 +3,8 @@ package com.springboot.crud.mysqlspring.domain.article.dto;
 import lombok.*;
 import org.antlr.v4.runtime.misc.NotNull;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -25,6 +27,14 @@ public class ArticleDto {
     @AllArgsConstructor
     public static class SingleArticle<T> {
         private T article;
+    }
+
+    @Getter
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class MultipleArticle {
+        private List<ArticleDto> articles;
     }
 
     @Getter
