@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -68,6 +69,12 @@ public class ArticleServiceImpl implements ArticleService{
         //return getArticle(title);
 
         return convertEntityToDto(found, false, 0L);
+    }
+
+    @Override
+    public List<ArticleDto> getAllArticles() {
+        List<ArticleEntity> articleEntities = articleRepository.findAllArticles();
+        return articleEntities.stream().map(articleEntity -> convertEntityToDto(articleEntity, true, 0L)).collect(Collectors.toList());
     }
 
     private ArticleDto convertEntityToDto(ArticleEntity entity, Boolean favorited, Long favoritesCount) {
