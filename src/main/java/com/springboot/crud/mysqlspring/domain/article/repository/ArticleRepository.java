@@ -14,7 +14,7 @@ import java.util.Optional;
 @Repository
 public interface ArticleRepository extends JpaRepository<ArticleEntity, Long> {
 
-    ArticleEntity findByTitle(@Param("title") String title);
+     ArticleEntity findByTitle(@Param("title") String title);
 
     @Query("SELECT t FROM ArticleEntity t")
     List<ArticleEntity> findAllArticles();
