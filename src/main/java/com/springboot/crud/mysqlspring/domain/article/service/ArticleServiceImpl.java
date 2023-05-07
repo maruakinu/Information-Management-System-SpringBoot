@@ -30,14 +30,14 @@ public class ArticleServiceImpl implements ArticleService{
                 .build();
 
         articleEntity = articleRepository.save(articleEntity);
-        return convertEntityToDto(articleEntity, false, 0L);
+        return convertEntityToDto(articleEntity);
 
     }
 
     @Override
     public ArticleDto getArticle(String title) {
         ArticleEntity found = articleRepository.findByTitle(title);
-        return convertEntityToDto(found, false, 0L);
+        return convertEntityToDto(found);
     }
 
     @Transactional
@@ -68,16 +68,16 @@ public class ArticleServiceImpl implements ArticleService{
 
         //return getArticle(title);
 
-        return convertEntityToDto(found, false, 0L);
+        return convertEntityToDto(found);
     }
 
     @Override
     public List<ArticleDto> getAllArticles() {
         List<ArticleEntity> articleEntities = articleRepository.findAllArticles();
-        return articleEntities.stream().map(articleEntity -> convertEntityToDto(articleEntity, true, 0L)).collect(Collectors.toList());
+        return articleEntities.stream().map(articleEntity -> convertEntityToDto(articleEntity)).collect(Collectors.toList());
     }
 
-    private ArticleDto convertEntityToDto(ArticleEntity entity, Boolean favorited, Long favoritesCount) {
+    private ArticleDto convertEntityToDto(ArticleEntity entity) {
         return ArticleDto.builder()
                 .id(entity.getId())
                 .title(entity.getTitle())

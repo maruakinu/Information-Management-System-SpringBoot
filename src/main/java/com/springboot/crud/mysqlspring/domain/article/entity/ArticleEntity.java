@@ -33,8 +33,7 @@ public class ArticleEntity {
 
 
     @Builder
-    public ArticleEntity(Long id, String title, String description, String author) {
-        this.id = id;
+    public ArticleEntity(String title, String description, String author) {
         this.title = title;
         this.description = description;
         this.author = author;
