@@ -5,9 +5,6 @@ import com.springboot.crud.mysqlspring.domain.article.service.ArticleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 @RestController
 @RequestMapping("/api")
@@ -17,12 +14,6 @@ public class ArticlesController {
     @Autowired
     private final ArticleService articleService;
 
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Created the author"),
-            @ApiResponse(responseCode = "400", description = "Bad request",
-                    content = @Content),
-            @ApiResponse(responseCode = "500", description = "Internal Server Error",
-                    content = @Content) })
     @PostMapping("/post")
     public ArticleDto.SingleArticle<ArticleDto> createArticle(@RequestBody ArticleDto.SingleArticle<ArticleDto> article) {
         return new ArticleDto.SingleArticle<>(articleService.createArticle(article.getArticle()));

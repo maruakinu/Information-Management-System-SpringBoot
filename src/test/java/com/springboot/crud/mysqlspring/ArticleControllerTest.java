@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
 import org.mockito.stubbing.Answer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,14 +54,17 @@ public class ArticleControllerTest {
 
     private ArticleDto.SingleArticle singleArticle;
 
+    @BeforeEach
+    void setUp() {
+        article = ArticleDto.builder().title("title").description("description").author("Marlo").build();
+        singleArticle = ArticleDto.SingleArticle.builder().article(article).build();
+    }
+
 
     @Test
     @DisplayName("create Article, should return expected 200")
     public void createArticleShouldReturn200() throws Exception {
-        //given
-        article = ArticleDto.builder().title("title").description("description").author("Marlo").build();
-        singleArticle = ArticleDto.SingleArticle.builder().article(article).build();
-//        String json = objectMapper.writeValueAsString(article);
+
         when(articleService.createArticle(any(ArticleDto.class))).thenReturn(article);
 
         //when-then
@@ -76,10 +80,7 @@ public class ArticleControllerTest {
     @DisplayName("retrieve Article, should return expected 200")
     public void retrieveArticleShouldReturn200() throws Exception {
         String title = "title";
-        //given
-        article = ArticleDto.builder().title("title").description("description").author("Marlo").build();
-        singleArticle = ArticleDto.SingleArticle.builder().article(article).build();
-//        String json = objectMapper.writeValueAsString(article);
+
         when(articleService.getArticle(title)).thenReturn(article);
 
         //when-then
@@ -89,6 +90,20 @@ public class ArticleControllerTest {
                 .andExpect(jsonPath("$.article", Matchers.notNullValue(ArticleDto.class)))
                 .andExpect(jsonPath("$.article.title", Matchers.is(article.getTitle())));
     }
+
+    @Test
+    @DisplayName("update Article, should return expected 200")
+    void updateArticleForm() throws Exception {
+        when(articleService.updateArticle(ArgumentMatchers.anyString(), any(ArticleDto.Update.class))).thenReturn(article);
+
+        mockMvc.perform(put("/api/title")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(singleArticle))
+                )
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.article", Matchers.notNullValue(ArticleDto.class)));
+    }
+
 
 
     @Test
