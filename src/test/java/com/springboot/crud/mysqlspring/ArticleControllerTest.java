@@ -91,6 +91,7 @@ public class ArticleControllerTest {
                 .andExpect(jsonPath("$.article.title", Matchers.is(article.getTitle())));
     }
 
+
     @Test
     @DisplayName("update Article, should return expected 200")
     void updateArticleForm() throws Exception {
@@ -102,6 +103,19 @@ public class ArticleControllerTest {
                 )
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.article", Matchers.notNullValue(ArticleDto.class)));
+    }
+
+    @Test
+    @DisplayName("retrieve All Articles, should return expected 200")
+    public void retrieveAllArticleShouldReturn200() throws Exception {
+
+        when(articleService.getAllArticles()).thenReturn(List.of(article));
+
+        //when-then
+        mockMvc.perform(get("/api/all")
+                        .contentType(APPLICATION_JSON_UTF8))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.articles", Matchers.notNullValue(ArticleDto.class)));
     }
 
 
