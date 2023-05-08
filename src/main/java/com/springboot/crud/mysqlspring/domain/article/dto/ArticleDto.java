@@ -4,7 +4,7 @@ import lombok.*;
 import org.antlr.v4.runtime.misc.NotNull;
 
 import java.util.List;
-
+import javax.validation.constraints.NotBlank;
 @Getter
 @Setter
 @AllArgsConstructor
