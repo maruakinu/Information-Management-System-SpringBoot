@@ -33,8 +33,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.isNull;
 import static org.mockito.Mockito.when;
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -57,7 +56,7 @@ public class ArticleControllerTest {
 
     @Test
     @DisplayName("create Article, should return expected 200")
-    public void createAuthorShouldReturn201() throws Exception {
+    public void createArticleShouldReturn200() throws Exception {
         //given
         article = ArticleDto.builder().title("title").description("description").author("Marlo").build();
         singleArticle = ArticleDto.SingleArticle.builder().article(article).build();
@@ -73,7 +72,31 @@ public class ArticleControllerTest {
     }
 
 
+    @Test
+    @DisplayName("retrieve Article, should return expected 200")
+    public void retrieveArticleShouldReturn200() throws Exception {
+        String title = "title";
+        //given
+        article = ArticleDto.builder().title("title").description("description").author("Marlo").build();
+        singleArticle = ArticleDto.SingleArticle.builder().article(article).build();
+//        String json = objectMapper.writeValueAsString(article);
+        when(articleService.getArticle(title)).thenReturn(article);
 
+        //when-then
+        mockMvc.perform(get("/api/" + title)
+                        .contentType(APPLICATION_JSON_UTF8))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.article", Matchers.notNullValue(ArticleDto.class)))
+                .andExpect(jsonPath("$.article.title", Matchers.is(article.getTitle())));
+    }
+
+
+    @Test
+    @DisplayName("delete Article, should return expected 200")
+    void deleteArticle() throws Exception {
+        mockMvc.perform(delete("/api/title"))
+                .andExpect(status().isOk());
+    }
 
 
 
