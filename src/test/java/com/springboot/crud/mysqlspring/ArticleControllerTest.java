@@ -25,7 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @AutoConfigureMockMvc(addFilters = false)
 @WebMvcTest(ArticlesController.class)
-@DisplayName("Author Resource Integration Tests")
+@DisplayName("Article Resource Integration Tests")
 public class ArticleControllerTest {
     @Autowired
     MockMvc mockMvc;
