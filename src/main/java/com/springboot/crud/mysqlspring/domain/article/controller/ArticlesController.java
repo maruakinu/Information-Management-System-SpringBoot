@@ -14,6 +14,7 @@ public class ArticlesController {
     @Autowired
     private final ArticleService articleService;
 
+    // Method
     @PostMapping("/post")
     public ArticleDto.SingleArticle<ArticleDto> createArticle(@RequestBody ArticleDto.SingleArticle<ArticleDto> article) {
         return new ArticleDto.SingleArticle<>(articleService.createArticle(article.getArticle()));
