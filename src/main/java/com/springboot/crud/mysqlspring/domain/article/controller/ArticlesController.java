@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
@@ -16,7 +18,7 @@ public class ArticlesController {
 
     // Method
     @PostMapping("/post")
-    public ArticleDto.SingleArticle<ArticleDto> createArticle(@RequestBody ArticleDto.SingleArticle<ArticleDto> article) {
+    public ArticleDto.SingleArticle<ArticleDto> createArticle(@RequestBody @Valid ArticleDto.SingleArticle<ArticleDto> article) {
         return new ArticleDto.SingleArticle<>(articleService.createArticle(article.getArticle()));
     }
 

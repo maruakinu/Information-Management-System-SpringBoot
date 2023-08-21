@@ -13,7 +13,6 @@ public class ArticleDto {
 
     @NonNull
     private long id;
-
     @NonNull
     private String title;
     @NonNull
