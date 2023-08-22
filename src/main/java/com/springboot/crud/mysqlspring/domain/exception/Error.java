@@ -13,6 +13,7 @@ public enum Error {
 
     FIELD_EMPTY("field should not be empty", HttpStatus.NO_CONTENT),
     USER_NOT_FOUND("user not found", HttpStatus.NOT_FOUND),
+    ARTICLE_NOT_FOUND("article not found", HttpStatus.NOT_FOUND),
     FOLLOW_NOT_FOUND("such follow not found", HttpStatus.NOT_FOUND),
     ;
 

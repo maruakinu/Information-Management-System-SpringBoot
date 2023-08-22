@@ -3,26 +3,33 @@ package com.springboot.crud.mysqlspring.domain.article.service;
 import com.springboot.crud.mysqlspring.domain.article.dto.ArticleDto;
 import com.springboot.crud.mysqlspring.domain.article.entity.ArticleEntity;
 import com.springboot.crud.mysqlspring.domain.article.repository.ArticleRepository;
+import com.springboot.crud.mysqlspring.domain.exception.AppException;
+import com.springboot.crud.mysqlspring.domain.exception.Error;
 import com.springboot.crud.mysqlspring.domain.user.entity.UserEntity;
 import com.springboot.crud.mysqlspring.domain.user.repository.UserRepository;
 import com.springboot.crud.mysqlspring.security.AuthUserDetails;
+import com.springboot.crud.mysqlspring.security.JwtUtils;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class ArticleServiceImpl implements ArticleService{
 
-    @Autowired
-    private final ArticleRepository articleRepository;
+    private static final Logger logger = LoggerFactory.getLogger(ArticleServiceImpl.class);
 
     @Autowired
-    private  final UserRepository userRepository;
+    private final ArticleRepository articleRepository;
 
     @Transactional
     @Override
@@ -56,9 +63,22 @@ public class ArticleServiceImpl implements ArticleService{
 
     @Transactional
     @Override
-    public void deleteArticle(String title) {
-        ArticleEntity found = articleRepository.findByTitle(title);
-        articleRepository.delete(found);
+    public void deleteArticle(String title, AuthUserDetails authUserDetails) {
+        String found = articleRepository.findByTitle(title).getAuthor().getId();
+        String authfound = authUserDetails.getId();
+        if (authfound.equals(found)){
+            try {
+                ArticleEntity articleToDelete = articleRepository.findByTitle(title);
+                logger.info("Article ID Deleted: " + articleToDelete.getId());
+                articleRepository.delete(articleToDelete);
+            } catch (AppException aex) {
+                throw new ResponseStatusException(
+                        aex.getError().getStatus().value(), aex.getError().getMessage(), aex);
+            }
+        }else if (authfound != found){
+            throw new AppException(Error.ARTICLE_NOT_FOUND);
+        }
+
     }
 
     @Transactional
@@ -74,13 +94,7 @@ public class ArticleServiceImpl implements ArticleService{
             found.setDescription(article.getDescription());
         }
 
-//        if (article.getAuthor() != null) {
-//            found.setAuthor(article.getAuthor());
-//        }
-
         articleRepository.save(found);
-
-        //return getArticle(title);
 
         return convertEntityToDto(found);
     }

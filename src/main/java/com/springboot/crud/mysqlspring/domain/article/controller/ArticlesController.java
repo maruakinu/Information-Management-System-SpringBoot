@@ -30,8 +30,8 @@ public class ArticlesController {
     }
 
     @DeleteMapping("/{title}")
-    public void deleteArticle(@PathVariable String title) {
-        articleService.deleteArticle(title);
+    public void deleteArticle(@PathVariable String title, @AuthenticationPrincipal AuthUserDetails authUserDetails) {
+        articleService.deleteArticle(title, authUserDetails);
     }
 
     @PutMapping("/{title}")

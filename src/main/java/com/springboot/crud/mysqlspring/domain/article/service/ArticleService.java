@@ -11,7 +11,7 @@ public interface ArticleService {
 
     ArticleDto getArticle(final String title, final AuthUserDetails authUserDetails);
 
-    void deleteArticle(final String title);
+    void deleteArticle(final String title, final AuthUserDetails authUserDetails);
 
     ArticleDto updateArticle(final String title, final ArticleDto.Update article);
 
