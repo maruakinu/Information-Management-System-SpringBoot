@@ -1,5 +1,6 @@
 package com.springboot.crud.mysqlspring.domain.article.dto;
 
+import com.springboot.crud.mysqlspring.domain.user.entity.UserEntity;
 import lombok.*;
 import org.antlr.v4.runtime.misc.NotNull;
 
@@ -17,8 +18,8 @@ public class ArticleDto {
     private String title;
     @NonNull
     private String description;
-    @NonNull
-    private String author;
+
+    private UserEntity author;
 
     @Getter
     @Builder

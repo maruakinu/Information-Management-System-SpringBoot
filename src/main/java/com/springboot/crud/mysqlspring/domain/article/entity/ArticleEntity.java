@@ -2,6 +2,7 @@ package com.springboot.crud.mysqlspring.domain.article.entity;
 
 
 
+import com.springboot.crud.mysqlspring.domain.user.entity.UserEntity;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -28,12 +29,13 @@ public class ArticleEntity {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "author")
-    private String author;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(nullable = false)
+    private UserEntity author;
 
 
     @Builder
-    public ArticleEntity(String title, String description, String author) {
+    public ArticleEntity(String title, String description, UserEntity author) {
         this.title = title;
         this.description = description;
         this.author = author;

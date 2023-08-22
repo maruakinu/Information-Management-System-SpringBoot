@@ -22,7 +22,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         return userRepository.findByEmail(email)
                 .map(userEntity ->
                         AuthUserDetails.builder()
-                                .id(Long.valueOf(userEntity.getId()))
+                                .id(userEntity.getId())
                                 .email(userEntity.getEmail())
                                 .build())
                 .orElse(null);

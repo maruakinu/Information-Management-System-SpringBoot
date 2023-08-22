@@ -19,4 +19,6 @@ public interface ArticleRepository extends JpaRepository<ArticleEntity, Long> {
     @Query("SELECT t FROM ArticleEntity t")
     List<ArticleEntity> findAllArticles();
 
+    List<ArticleEntity> findByAuthorId(@Param("authorId") String authorId);
+
 }

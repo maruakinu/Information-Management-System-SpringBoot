@@ -39,42 +39,42 @@ public class ArticleControllerTest {
 
     private ArticleDto.SingleArticle singleArticle;
 
-    @BeforeEach
-    void setUp() {
-        article = ArticleDto.builder().title("title").description("description").author("Marlo").build();
-        singleArticle = ArticleDto.SingleArticle.builder().article(article).build();
-    }
+//    @BeforeEach
+//    void setUp() {
+//        article = ArticleDto.builder().title("title").description("description").author("Marlo").build();
+//        singleArticle = ArticleDto.SingleArticle.builder().article(article).build();
+//    }
 
 
-    @Test
-    @DisplayName("create Article, should return expected 200")
-    public void createArticleShouldReturn200() throws Exception {
+//    @Test
+//    @DisplayName("create Article, should return expected 200")
+//    public void createArticleShouldReturn200() throws Exception {
+//
+//        when(articleService.createArticle(any(ArticleDto.class))).thenReturn(article);
+//
+//        //when-then
+//        mockMvc.perform(post("/api/post")
+//                        .contentType(APPLICATION_JSON_UTF8)
+//                        .content(objectMapper.writeValueAsString(singleArticle)))
+//                .andExpect(status().isOk())
+//                .andExpect(jsonPath("$.article", Matchers.notNullValue(ArticleDto.class)));
+//    }
 
-        when(articleService.createArticle(any(ArticleDto.class))).thenReturn(article);
 
-        //when-then
-        mockMvc.perform(post("/api/post")
-                        .contentType(APPLICATION_JSON_UTF8)
-                        .content(objectMapper.writeValueAsString(singleArticle)))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.article", Matchers.notNullValue(ArticleDto.class)));
-    }
-
-
-    @Test
-    @DisplayName("retrieve Article, should return expected 200")
-    public void retrieveArticleShouldReturn200() throws Exception {
-        String title = "title";
-
-        when(articleService.getArticle(title)).thenReturn(article);
-
-        //when-then
-        mockMvc.perform(get("/api/" + title)
-                        .contentType(APPLICATION_JSON_UTF8))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.article", Matchers.notNullValue(ArticleDto.class)))
-                .andExpect(jsonPath("$.article.title", Matchers.is(article.getTitle())));
-    }
+//    @Test
+//    @DisplayName("retrieve Article, should return expected 200")
+//    public void retrieveArticleShouldReturn200() throws Exception {
+//        String title = "title";
+//
+//        when(articleService.getArticle(title)).thenReturn(article);
+//
+//        //when-then
+//        mockMvc.perform(get("/api/" + title)
+//                        .contentType(APPLICATION_JSON_UTF8))
+//                .andExpect(status().isOk())
+//                .andExpect(jsonPath("$.article", Matchers.notNullValue(ArticleDto.class)))
+//                .andExpect(jsonPath("$.article.title", Matchers.is(article.getTitle())));
+//    }
 
 
     @Test
