@@ -100,7 +100,7 @@ public class ArticleServiceImpl implements ArticleService{
         }
         articleRepository.save(foundArticle);
 
-        return convertEntityToDto(foundArticle);
+        return convertEntityToDtos(foundArticle, authUserDetails);
 
 //        if (article.getTitle() != null) {
 //            found.setTitle(article.getTitle());
