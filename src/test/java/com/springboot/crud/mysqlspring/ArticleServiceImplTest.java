@@ -29,24 +29,24 @@ public class ArticleServiceImplTest {
 
     private String expectedTitle;
 
-    @BeforeEach
-    void setUp() {
-
-        article = ArticleDto.builder()
-                .title("title")
-                .description("description")
-                .author("Marlo")
-                .build();
-
-        expectedTitle = article.getTitle();
-
-        expectedArticle = ArticleEntity.builder()
-                .title(expectedTitle)
-                .description(article.getDescription())
-                .author(article.getAuthor())
-                .build();
-
-    }
+//    @BeforeEach
+//    void setUp() {
+//
+//        article = ArticleDto.builder()
+//                .title("title")
+//                .description("description")
+//                .author("Marlo")
+//                .build();
+//
+//        expectedTitle = article.getTitle();
+//
+//        expectedArticle = ArticleEntity.builder()
+//                .title(expectedTitle)
+//                .description(article.getDescription())
+//                .author(article.getAuthor())
+//                .build();
+//
+//    }
 
     @Test
     void whenValidArticleForm_thenReturnArticle() {

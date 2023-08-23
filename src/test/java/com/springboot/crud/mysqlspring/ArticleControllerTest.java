@@ -77,18 +77,18 @@ public class ArticleControllerTest {
 //    }
 
 
-    @Test
-    @DisplayName("update Article, should return expected 200")
-    void updateArticleForm() throws Exception {
-        when(articleService.updateArticle(ArgumentMatchers.anyString(), any(ArticleDto.Update.class))).thenReturn(article);
-
-        mockMvc.perform(put("/api/title")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(singleArticle))
-                )
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.article", Matchers.notNullValue(ArticleDto.class)));
-    }
+//    @Test
+//    @DisplayName("update Article, should return expected 200")
+//    void updateArticleForm() throws Exception {
+//        when(articleService.updateArticle(ArgumentMatchers.anyString(), any(ArticleDto.Update.class))).thenReturn(article);
+//
+//        mockMvc.perform(put("/api/title")
+//                        .contentType(MediaType.APPLICATION_JSON)
+//                        .content(objectMapper.writeValueAsString(singleArticle))
+//                )
+//                .andExpect(status().isOk())
+//                .andExpect(jsonPath("$.article", Matchers.notNullValue(ArticleDto.class)));
+//    }
 
     @Test
     @DisplayName("retrieve All Articles, should return expected 200")

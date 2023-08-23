@@ -35,8 +35,8 @@ public class ArticlesController {
     }
 
     @PutMapping("/{title}")
-    public ArticleDto.SingleArticle<ArticleDto> createArticle(@PathVariable String title, @RequestBody ArticleDto.SingleArticle<ArticleDto.Update> article) {
-        return new ArticleDto.SingleArticle<>(articleService.updateArticle(title, article.getArticle()));
+    public ArticleDto.SingleArticle<ArticleDto> createArticle(@PathVariable String title, @RequestBody ArticleDto.SingleArticle<ArticleDto.Update> article, @AuthenticationPrincipal AuthUserDetails authUserDetails) {
+        return new ArticleDto.SingleArticle<>(articleService.updateArticle(title, article.getArticle(), authUserDetails));
     }
 
     @GetMapping("/all")

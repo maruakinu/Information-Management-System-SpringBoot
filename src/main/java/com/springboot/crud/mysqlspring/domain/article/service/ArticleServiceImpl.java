@@ -83,20 +83,34 @@ public class ArticleServiceImpl implements ArticleService{
 
     @Transactional
     @Override
-    public ArticleDto updateArticle(String title, ArticleDto.Update article) {
-        ArticleEntity found = articleRepository.findByTitle(title);
+    public ArticleDto updateArticle(String title, ArticleDto.Update article, AuthUserDetails authUserDetails) {
+        String found = articleRepository.findByTitle(title).getAuthor().getId();
+        String authfound = authUserDetails.getId();
+        ArticleEntity foundArticle = articleRepository.findByTitle(title);
 
-        if (article.getTitle() != null) {
-            found.setTitle(article.getTitle());
+        if (authfound.equals(found)){
+
+            if (article.getTitle() != null) {
+                foundArticle.setTitle(article.getTitle());
+            }
+
+            if (article.getDescription() != null){
+                foundArticle.setDescription(article.getDescription());
+            }
         }
+        articleRepository.save(foundArticle);
 
-        if (article.getDescription() != null) {
-            found.setDescription(article.getDescription());
-        }
+        return convertEntityToDto(foundArticle);
 
-        articleRepository.save(found);
+//        if (article.getTitle() != null) {
+//            found.setTitle(article.getTitle());
+//        }
+//
+//        if (article.getDescription() != null) {
+//            found.setDescription(article.getDescription());
+//        }
 
-        return convertEntityToDto(found);
+
     }
 
     @Override

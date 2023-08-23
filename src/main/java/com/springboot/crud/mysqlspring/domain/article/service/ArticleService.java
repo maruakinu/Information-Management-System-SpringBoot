@@ -13,7 +13,7 @@ public interface ArticleService {
 
     void deleteArticle(final String title, final AuthUserDetails authUserDetails);
 
-    ArticleDto updateArticle(final String title, final ArticleDto.Update article);
+    ArticleDto updateArticle(final String title, final ArticleDto.Update article, final AuthUserDetails authUserDetails);
 
     List<ArticleDto> getAllArticles();
 
