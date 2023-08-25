@@ -15,7 +15,7 @@ public interface ArticleService {
 
     ArticleDto updateArticle(final String title, final ArticleDto.Update article, final AuthUserDetails authUserDetails);
 
-    List<ArticleDto> getAllArticles();
+//    List<ArticleDto> getAllArticles();
 
     List<ArticleDto> getAllArticlesWithUserId(final AuthUserDetails authUserDetails);
 

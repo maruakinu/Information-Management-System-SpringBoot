@@ -39,12 +39,14 @@ public class ArticlesController {
         return new ArticleDto.SingleArticle<>(articleService.updateArticle(title, article.getArticle(), authUserDetails));
     }
 
-    @GetMapping("/all")
-    public ArticleDto.MultipleArticle getArticle() {
-        return ArticleDto.MultipleArticle.builder()
-                .articles(articleService.getAllArticles())
-                .build();
-    }
+    // This Controller is for Getting All Articles Without Authentication
+
+//    @GetMapping("/all")
+//    public ArticleDto.MultipleArticle getArticle() {
+//        return ArticleDto.MultipleArticle.builder()
+//                .articles(articleService.getAllArticles())
+//                .build();
+//    }
 
     @GetMapping("/articles")
     public ArticleDto.MultipleArticle get_All_Articles_Associated_By_UserId(@AuthenticationPrincipal AuthUserDetails authUserDetails) {
